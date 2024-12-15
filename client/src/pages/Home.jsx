@@ -1,10 +1,9 @@
-import Base from "../components/Home/base";
+import VCard from "../components/Home/VCard";
 
 const Home = () => {
   return (
     <>
-      <div>Hola</div>
-      <Base />
+      <VCard />
     </>
   );
 };
