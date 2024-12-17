@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import "../../css/VCard.css";
 import {
   FaUser,
   FaEnvelope,
@@ -42,113 +43,6 @@ const VCard = () => {
   const [fileType, setFileType] = useState("pdf"); // Estado para el tipo de archivo
   const [menuVisible, setMenuVisible] = useState(false); // Estado para la visibilidad del menú
   const menuRef = useRef(null);
-
-  const styles = {
-    container: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: "20px",
-      minWidth: "400px",
-      maxWidth: "500px",
-      margin: "auto",
-      backgroundColor: "#263a42",
-      borderRadius: "15px",
-      boxShadow: "0 6px 20px rgba(0, 0, 0, 0.2)",
-      fontFamily: "'Poppins', sans-serif",
-      color: "#ffffff",
-      position: "relative",
-      zIndex: "2",
-    },
-    photo: {
-      borderRadius: "50%",
-      width: "200px",
-      height: "200px",
-      marginBottom: "20px",
-      objectFit: "cover",
-      border: "5px solid #f4a261",
-    },
-    info: {
-      display: "flex",
-      alignItems: "center",
-      marginBottom: "15px",
-      fontSize: "16px",
-      textAlign: "center",
-      wordWrap: "break-word",
-      maxWidth: "90%",
-    },
-    icon: {
-      marginRight: "10px",
-      color: "#f4a261",
-      fontSize: "20px",
-    },
-    actionIcon: {
-      fontSize: "35px",
-      color: "#f4a261",
-      cursor: "pointer",
-      position: "relative",
-    },
-    actionText: {
-      fontSize: "14px",
-      color: "#ffffff",
-      textAlign: "center",
-      marginTop: "5px",
-    },
-    actionTextMultiline: {
-      fontSize: "14px",
-      color: "#ffffff",
-      textAlign: "center",
-      marginTop: "5px",
-      lineHeight: "1.3",
-    },
-    downloadSection: {
-      position: "absolute",
-      top: "15px",
-      right: "15px",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      gap: "10px",
-    },
-    buttons: {
-      display: "flex",
-      justifyContent: "space-between",
-      width: "100%",
-      marginTop: "30px",
-    },
-    buttonContainer: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-    link: {
-      color: "#f4a261",
-      textDecoration: "none",
-      cursor: "pointer",
-    },
-    menu: {
-      position: "absolute",
-      top: "40px",
-      right: "0",
-      backgroundColor: "#ffffff",
-      color: "#263a42",
-      border: "1px solid #f4a261",
-      borderRadius: "5px",
-      boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-      zIndex: "3",
-      display: menuVisible ? "block" : "none",
-    },
-    menuItem: {
-      padding: "10px 15px",
-      cursor: "pointer",
-      whiteSpace: "nowrap",
-    },
-    menuItemHover: {
-      backgroundColor: "#f4a261",
-      color: "#ffffff",
-    },
-  };
 
   const handleDownload = () => {
     setMenuVisible(!menuVisible);
@@ -394,101 +288,81 @@ const VCard = () => {
       </video>
 
       {/* Contenedor del card */}
-      <div style={styles.container}>
-        <div style={styles.downloadSection} ref={menuRef}>
-          {/* Botón de descarga */}
+      <div className="container">
+        {/* Sección de descarga */}
+        <div className="downloadSection" ref={menuRef}>
           <FaDownload
-            style={styles.actionIcon}
+            className="actionIcon"
             onClick={handleDownload}
             title="Descargar"
           />
           {/* Menú Desplegable */}
           {menuVisible && (
-            <div style={styles.menu}>
+            <div className="menu">
               <div
-                style={styles.menuItem}
+                className="menuItem"
                 onClick={() => handleFileTypeSelection("pdf")}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.backgroundColor =
-                    styles.menuItemHover.backgroundColor)
-                }
-                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "")}
               >
                 PDF
               </div>
-
               <div
-                style={styles.menuItem}
+                className="menuItem"
                 onClick={() => handleFileTypeSelection("txt")}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.backgroundColor =
-                    styles.menuItemHover.backgroundColor)
-                }
-                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "")}
               >
                 TXT
               </div>
             </div>
           )}
         </div>
-        <img src={userData.foto} alt="Foto del usuario" style={styles.photo} />
-        <div style={styles.info}>
-          <FaUser style={styles.icon} />
+
+        {/* Foto de usuario */}
+        <img src={userData.foto} alt="Foto del usuario" className="photo" />
+
+        {/* Información del usuario */}
+        <div className="info">
+          <FaUser className="icon" />
           <span>
             {userData.nombres} {userData.apellidos}
           </span>
         </div>
-        <div style={styles.info}>
-          <FaBriefcase style={styles.icon} />
-          <span
-            style={{
-              textAlign: "center",
-              wordWrap: "break-word",
-              // maxWidth: "80%",
-            }}
-          >
-            {userData.cargo}
-          </span>
+        <div className="info">
+          <FaBriefcase className="icon" />
+          <span>{userData.cargo}</span>
         </div>
-        {/* <div style={styles.info}>
-          <FaTransgender style={styles.icon} />
-          <span>{userData.genero}</span>
-        </div> */}
-        <div style={styles.info}>
-          <FaMapMarkerAlt style={styles.icon} />
+        <div className="info">
+          <FaMapMarkerAlt className="icon" />
           <span>{userData.procedencia}</span>
         </div>
-        <div style={styles.info}>
-          <FaPhone style={styles.icon} />
+        <div className="info">
+          <FaPhone className="icon" />
           <span>{userData.telefono}</span>
         </div>
-        <div style={styles.info}>
-          <FaEnvelope style={styles.icon} />
-          <a href={`mailto:${userData.correo}`} style={styles.link}>
+        <div className="info">
+          <FaEnvelope className="icon" />
+          <a href={`mailto:${userData.correo}`} className="link">
             {userData.correo}
           </a>
         </div>
-        <div style={styles.buttons}>
+
+        {/* Botones de acciones */}
+        <div className="buttons">
           <div
-            style={{
-              ...styles.buttonContainer,
-              transition: "transform 0.3s ease",
-            }}
+            className="buttonContainer"
             onClick={handleClick}
             onMouseEnter={(e) =>
               (e.currentTarget.style.transform = "scale(1.1)")
             }
             onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            style={{ transition: "transform 0.3s ease" }}
           >
-            <FaWhatsapp style={styles.actionIcon} />
-            <div style={styles.actionText}>Contactar</div>
+            <FaWhatsapp className="actionIcon" />
+            <div className="actionText">Contactar</div>
           </div>
 
-          <div style={styles.buttonContainer}>
-            <FaGlobe style={styles.actionIcon} />
-            <div style={styles.actionTextMultiline}>
-              Visita mi <br />
-              comunidad
+          <div className="buttonContainer">
+            <FaGlobe className="actionIcon" />
+            <div className="actionTextMultiline">
+              Visita mi <br /> comunidad
             </div>
           </div>
         </div>
