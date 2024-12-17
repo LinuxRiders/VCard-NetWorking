@@ -345,26 +345,46 @@ const VCard = () => {
         </div>
 
         {/* Botones de acciones */}
-        <div className="buttons">
+        <div className="buttons" style={{ justifyContent: "space-evenly" }}>
           <div
             className="buttonContainer"
+            style={{ cursor: "pointer" }}
             onClick={handleClick}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.transform = "scale(1.1)")
-            }
-            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-            style={{ transition: "transform 0.3s ease" }}
           >
-            <FaWhatsapp className="actionIcon" />
+            <FaWhatsapp
+              className="actionIcon"
+              style={{ transition: "transform 0.3s ease" }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = "scale(1.1)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
+            />
             <div className="actionText">Contactar</div>
           </div>
 
-          <div className="buttonContainer">
-            <FaGlobe className="actionIcon" />
-            <div className="actionTextMultiline">
-              Visita mi <br /> comunidad
+          {userData?.comunity && (
+            <div
+              className="buttonContainer"
+              style={{ cursor: "pointer" }}
+              onClick={() => window.open(userData.comunity, "_blank")}
+            >
+              <FaGlobe
+                className="actionIcon"
+                style={{ transition: "transform 0.3s ease" }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.1)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
+              />
+              <div className="actionTextMultiline">
+                Visita mi <br /> comunidad
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
